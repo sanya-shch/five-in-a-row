@@ -6,6 +6,9 @@ import "./style.scss";
 
 import { getGameRoomData, onSnapshotGame } from "../../firebase/game";
 import gameStore from "../../store/game";
+import GameBlock from "../../modules/GameBlock";
+import StartBlock from "../../modules/StartBlock";
+import Header from "../../modules/Header";
 
 const StartModal = lazy(() => import("../../modules/StartModal"));
 
@@ -25,9 +28,6 @@ const GamePage = observer(() => {
   useEffect(() => {
     checkIfGameExists();
     const unsubscribe = onSnapshotGame(id, (doc) => {
-      // setGameData(doc.data());
-      // setDataLoaded(true);
-
       gameStore.setGameData(doc.data(), navigate);
     });
     return () => {
@@ -36,8 +36,7 @@ const GamePage = observer(() => {
   }, [checkIfGameExists, id, navigate]);
 
   return (
-    <div>
-      <div>{gameStore.isStartModalOpen ? "true" : "false"}</div>
+    <div className="game_page">
       {gameStore.isStartModalOpen && (
         <Suspense fallback="loading">
           <StartModal
@@ -47,6 +46,11 @@ const GamePage = observer(() => {
           />
         </Suspense>
       )}
+
+      {gameStore.isWaitStart && <Header />}
+
+      {gameStore.isWaitStart &&
+        (gameStore.ongoingGame ? <GameBlock /> : <StartBlock id={id} />)}
     </div>
   );
 });

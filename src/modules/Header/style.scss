@@ -1,0 +1,13 @@
+.header_block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+
+  .title {
+    font-size: 2.5rem;
+    color: #646464;
+    user-select: none;
+    cursor: pointer;
+  }
+}

@@ -4,13 +4,15 @@ import { snakeToCamel } from "../helpers/snakeToCamel";
 import { getUserId } from "../helpers/getUserId";
 
 class GameStore {
-  hostUid = null;
   gameRoomClosed = false;
   bannedPlayersUidList = [];
   currentPlayerUid = null;
   playersList = [];
   midgamePlayerUidList = [];
   ongoingGame = false;
+
+  hostUid = null;
+  isHost = false;
 
   isStartModalOpen = false;
   isWaitStart = false;
@@ -45,6 +47,9 @@ class GameStore {
       // console.log(key);
       this[key] = value;
     });
+
+    // set isHost
+    this.isHost = this.hostUid === this.uuid;
 
     // checkIfUserExists
     let userExists = false;
