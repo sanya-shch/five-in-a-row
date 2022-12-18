@@ -1,0 +1,125 @@
+.start-modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+  z-index: 500;
+  padding: 40px 20px 40px;
+
+  .modal-content {
+    width: 500px;
+    background-color: #f6f6e9;
+    color: #313131;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 33px;
+    border: 2px solid #525252;
+  }
+
+  .input_name_block {
+    height: 95px;
+    margin: 10px;
+    width: calc(100% - 40px);
+
+    .input_container {
+      input {
+        height: 95px;
+      }
+    }
+  }
+  .content_block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 5px 10px;
+  }
+  .colors_block {
+    user-select: none;
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    div {
+      width: 80px;
+      height: 80px;
+      margin: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+
+      &:hover {
+        border: 2px dashed #646464;
+      }
+
+      &.checked {
+        border: 2px solid #646464;
+      }
+    }
+
+    div.green {
+      background-color: #28CC75;
+    }
+
+    div.blue {
+      background-color: #298EEA;
+    }
+
+    div.red {
+      background-color: #FF6768;
+    }
+
+    div.yellow {
+      background-color: #FEEE7D;
+    }
+  }
+  .btn_block {
+    width: 100%;
+
+    .main_button {
+      cursor: pointer;
+      max-width: 100%;
+      border-radius: 30px;
+      font-size: 36px;
+      padding: 12px;
+      margin: 10px;
+      width: calc(100% - 20px);
+      background-color: #f6f6e9;
+      color: #646464;
+      border: 2px dashed #f6f6e9;
+
+      &:hover {
+        border: 2px dashed #646464;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .start-modal .modal-content {
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .start-modal {
+    .input_name_block {
+      .input_container {
+        input {
+          font-size: 26px;
+        }
+
+        span {
+          font-size: 26px;
+        }
+      }
+    }
+  }
+}
