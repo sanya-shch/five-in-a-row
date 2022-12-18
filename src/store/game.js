@@ -11,6 +11,8 @@ class GameStore {
   midgamePlayerUidList = [];
   ongoingGame = false;
 
+  gameBoard = {};
+
   hostUid = null;
   isHost = false;
 

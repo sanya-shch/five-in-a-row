@@ -50,7 +50,11 @@ const GamePage = observer(() => {
       {gameStore.isWaitStart && <Header />}
 
       {gameStore.isWaitStart &&
-        (gameStore.ongoingGame ? <GameBlock /> : <StartBlock id={id} />)}
+        (gameStore.ongoingGame ? (
+          <GameBlock id={id} />
+        ) : (
+          <StartBlock id={id} />
+        ))}
     </div>
   );
 });
