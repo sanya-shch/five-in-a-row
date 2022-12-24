@@ -61,6 +61,7 @@ export const startGame = (id, newCurrentPlayerUid) => {
   return updateDoc(doc(db, "game_rooms_five_in_a_row", id), {
     ongoing_game: true,
     current_player_uid: newCurrentPlayerUid,
+    game_stage: "click",
     game_board: gameBoard,
     points,
   });
@@ -72,11 +73,21 @@ export const reset = (id, currentPlayerUid) => {
     ongoing_game: false,
     game_board: {},
     points: {},
+    game_stage: "click",
   });
 };
 
 export const setPoint = (id, pointId, color, points) => {
   updateDoc(doc(db, "game_rooms_five_in_a_row", id), {
     points: { ...points, [pointId]: color },
+    game_stage: "rotate",
+  });
+};
+
+export const rotateBlock = (id, newCurrentPlayerUid, gameBoard) => {
+  updateDoc(doc(db, "game_rooms_five_in_a_row", id), {
+    current_player_uid: newCurrentPlayerUid,
+    game_stage: "click",
+    game_board: gameBoard,
   });
 };

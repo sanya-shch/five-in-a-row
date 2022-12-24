@@ -58,6 +58,7 @@ const HomePage = observer(({ gameId, setGameId }) => {
           game_room_closed: false,
           ongoing_game: false,
           game_board: {},
+          game_stage: "click",
         },
       });
 

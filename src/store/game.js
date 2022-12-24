@@ -10,6 +10,7 @@ class GameStore {
   playersList = [];
   midgamePlayerUidList = [];
   ongoingGame = false;
+  gameStage = "click";
 
   gameBoard = {};
 

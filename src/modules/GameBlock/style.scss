@@ -23,19 +23,38 @@
   .info_block {
     display: flex;
     flex-direction: column;
+    gap: 20px;
 
-    button {
-      transform: rotate(270deg);
-      border: 2px solid #646464;
-      padding: 8px 16px;
-      margin: 8px;
-      border-radius: 24px;
+    svg {
+      width: 40px;
+      height: 40px;
+      fill: #878787;
+      transition: 1s;
+      margin: 0 20px;
       user-select: none;
-      cursor: pointer;
+      cursor: default;
 
-      &:hover {
-        border: 2px dashed #646464;
-      }
+      border: 2px solid #878787;
+      padding: 4px;
+      border-radius: 35%;
+    }
+
+    //.click_btn {
+    //
+    //}
+    //.rotate_btn {
+    //
+    //}
+    .reset_btn {
+      fill: #ff6768;
+      border: none;
+      cursor: pointer;
+      margin-top: 36px;
+    }
+
+    .on {
+      fill: white;
+      border: 2px solid white;
     }
   }
 }
@@ -55,6 +74,7 @@
     padding: min(4px, 1vh, 1vw);
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    position: relative;
 
     .point {
       width: min(6vh, 6vw, 65px);
@@ -86,6 +106,43 @@
       &.yellow {
         background-color: #feee7d;
         cursor: default;
+      }
+    }
+
+    .rotate_block {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+
+      .rotate_btn {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+
+        svg {
+          width: 40px;
+          height: 40px;
+          fill: #646464;
+          transition: 1s;
+          user-select: none;
+          display: none;
+        }
+
+        &:hover svg {
+          display: unset;
+        }
+
+        &:nth-of-type(1) svg {
+          margin: 15% auto 0 15%;
+        }
+        &:nth-of-type(2) svg {
+          margin: 15% 15% 0 auto;
+        }
       }
     }
   }
