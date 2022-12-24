@@ -116,6 +116,8 @@ const StartBlock = observer(({ id }) => {
     // });
     await deleteGameRoom(id);
     await updateGameCodesById(id);
+
+    navigate("/");
   };
 
   const handleClickLeave = async () => {
