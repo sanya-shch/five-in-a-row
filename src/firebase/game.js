@@ -41,8 +41,36 @@ export const banPlayer = (id, banned_player_uid, players_list) =>
 export const deleteGameRoom = (id) =>
   deleteDoc(doc(db, "game_rooms_five_in_a_row", id));
 
-export const startGame = (id, newCurrentPlayerUid) =>
-  updateDoc(doc(db, "game_rooms_five_in_a_row", id), {
+export const startGame = (id, newCurrentPlayerUid) => {
+  const points = {};
+  const gameBoard = {};
+
+  for (let i = 0, pointIdx = 0; i < 9; i++) {
+    const matrix = [];
+
+    for (let y = 0; y < 9; y++) {
+      matrix.push(`point-${pointIdx}`);
+
+      points[`point-${pointIdx}`] = 0;
+      pointIdx++;
+    }
+
+    gameBoard[i] = matrix;
+  }
+
+  return updateDoc(doc(db, "game_rooms_five_in_a_row", id), {
     ongoing_game: true,
     current_player_uid: newCurrentPlayerUid,
+    game_board: gameBoard,
+    points,
   });
+};
+
+export const reset = (id, currentPlayerUid) => {
+  updateDoc(doc(db, "game_rooms_five_in_a_row", id), {
+    current_player_uid: currentPlayerUid,
+    ongoing_game: false,
+    game_board: {},
+    points: {},
+  });
+};
