@@ -16,6 +16,7 @@ import { ReactComponent as ClickSvg } from "../../assets/click-icon.svg";
 import { ReactComponent as RotateSvg } from "../../assets/rotate-left-svgrepo-com.svg";
 import { ReactComponent as RotateRightSvg } from "../../assets/rotate-right-svgrepo-com.svg";
 import { ReactComponent as ResetSvg } from "../../assets/remove-icon.svg";
+import Tooltip from "../../components/Tooltip";
 
 const GameBlock = observer(({ id }) => {
   const currentPlayerColor = gameStore.playersList.find(
@@ -108,7 +109,9 @@ const GameBlock = observer(({ id }) => {
           }`}
         />
         {gameStore.isHost && gameStore.ongoingGame && (
-          <ResetSvg className="reset_btn" onClick={handleClickReset} />
+          <Tooltip text="RESET GAME">
+            <ResetSvg className="reset_btn" onClick={handleClickReset} />
+          </Tooltip>
         )}
       </div>
     </div>

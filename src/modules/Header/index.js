@@ -5,6 +5,7 @@ import "./style.scss";
 
 import gameStore from "../../store/game";
 import { observer } from "mobx-react-lite";
+import Tooltip from "../../components/Tooltip";
 
 const Header = observer(() => {
   const navigate = useNavigate();
@@ -26,7 +27,9 @@ const Header = observer(() => {
       {gameStore.ongoingGame && (
         <div className="players_list">
           {gameStore.playersList.map((item) => (
-            <div key={item.color} className={`player_item ${item.color}`} />
+            <Tooltip key={item.color} text={`player_item ${item.username}`}>
+              <div className={`player_item ${item.color}`} />
+            </Tooltip>
           ))}
         </div>
       )}

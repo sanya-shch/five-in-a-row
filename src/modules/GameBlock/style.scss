@@ -28,13 +28,12 @@
     svg {
       width: 40px;
       height: 40px;
-      fill: #878787;
+      fill: lightgray;
       transition: 1s;
       margin: 0 20px;
       user-select: none;
       cursor: default;
-
-      border: 2px solid #878787;
+      border: 2px solid lightgray;
       padding: 4px;
       border-radius: 35%;
     }
@@ -53,8 +52,8 @@
     }
 
     .on {
-      fill: white;
-      border: 2px solid white;
+      fill: #646464;
+      border: 2px solid #646464;
     }
   }
 }
