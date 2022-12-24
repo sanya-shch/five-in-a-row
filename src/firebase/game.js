@@ -74,3 +74,9 @@ export const reset = (id, currentPlayerUid) => {
     points: {},
   });
 };
+
+export const setPoint = (id, pointId, color, points) => {
+  updateDoc(doc(db, "game_rooms_five_in_a_row", id), {
+    points: { ...points, [pointId]: color },
+  });
+};

@@ -25,10 +25,6 @@ class GameStore {
     makeAutoObservable(this);
   }
 
-  // addPlayer(player) {
-  //   this.playersList.push(player);
-  // }
-
   setIsStartModalOpen(value) {
     this.isStartModalOpen = value;
   }
