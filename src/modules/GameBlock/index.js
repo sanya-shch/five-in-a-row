@@ -4,19 +4,20 @@ import { observer } from "mobx-react-lite";
 import "./style.scss";
 
 import gameStore from "../../store/game";
-import { reset, setPoint, rotateBlock } from "../../firebase/game";
+import { reset, setPoint, rotateBlock, playerWin } from "../../firebase/game";
 import { chunkArray } from "../../helpers/chunkArray";
 import {
   rotateClockwise,
   rotateCounterClockwise,
 } from "../../helpers/matrixRotate";
 import { getNextPlayerUid } from "../../helpers/getNextPlayerUid";
+import Tooltip from "../../components/Tooltip";
+import { checkWin } from "../../helpers/checkWin";
 
 import { ReactComponent as ClickSvg } from "../../assets/click-icon.svg";
 import { ReactComponent as RotateSvg } from "../../assets/rotate-left-svgrepo-com.svg";
 import { ReactComponent as RotateRightSvg } from "../../assets/rotate-right-svgrepo-com.svg";
 import { ReactComponent as ResetSvg } from "../../assets/remove-icon.svg";
-import Tooltip from "../../components/Tooltip";
 
 const GameBlock = observer(({ id }) => {
   const currentPlayerColor = gameStore.playersList.find(
@@ -53,10 +54,28 @@ const GameBlock = observer(({ id }) => {
       gameStore.currentPlayerUid
     );
 
-    await rotateBlock(id, nextPlayerUid, {
-      ...gameStore.gameBoard,
-      [blockIndex]: newRotatedMatrix.flat(),
-    });
+    const isWin = checkWin(
+      gameStore.playersList.map((item) => item.color),
+      {
+        ...gameStore.gameBoard,
+        [blockIndex]: newRotatedMatrix.flat(),
+      },
+      gameStore.points
+    );
+
+    console.log({ isWin });
+
+    if (isWin) {
+      await playerWin(id, {
+        ...gameStore.gameBoard,
+        [blockIndex]: newRotatedMatrix.flat(),
+      });
+    } else {
+      await rotateBlock(id, nextPlayerUid, {
+        ...gameStore.gameBoard,
+        [blockIndex]: newRotatedMatrix.flat(),
+      });
+    }
   };
 
   return (

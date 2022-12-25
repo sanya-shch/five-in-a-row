@@ -91,3 +91,10 @@ export const rotateBlock = (id, newCurrentPlayerUid, gameBoard) => {
     game_board: gameBoard,
   });
 };
+
+export const playerWin = (id, gameBoard) => {
+  updateDoc(doc(db, "game_rooms_five_in_a_row", id), {
+    game_stage: "",
+    game_board: gameBoard,
+  });
+};
