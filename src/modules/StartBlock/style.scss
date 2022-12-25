@@ -15,10 +15,10 @@
 
       button {
         color: #646464;
-        border: 2px dashed #646464;
+        border: 2px solid #646464;
 
         &:hover {
-          border: 2px solid #646464;
+          border: 2px dashed #646464;
         }
       }
     }
@@ -29,8 +29,8 @@
     padding: 8px 16px;
     margin: 12px;
     border-radius: 24px;
-    color: white;
-    height: 50px;
+    color: #646464;
+    height: 54px;
     width: 100%;
     max-width: 500px;
 
@@ -47,12 +47,8 @@
       user-select: none;
       height: max-content;
       background-color: inherit;
-      border: 2px dashed #f2f4f6;
-      color: white;
-
-      &:hover {
-        border: 2px solid #f2f4f6;
-      }
+      border: 2px solid #646464;
+      color: #646464;
     }
     button:nth-of-type(1) {
       margin-left: auto;
@@ -63,19 +59,27 @@
   }
 
   .green {
-    background-color: #28cc75;
+    background-color: #ccffe4;
+    border: 2px solid #28cc75;
+    border-left-width: 8px;
   }
 
   .blue {
-    background-color: #298eea;
+    background-color: #cce6ff;
+    border: 2px solid #298eea;
+    border-left-width: 8px;
   }
 
   .red {
-    background-color: #ff6768;
+    background-color: #ffcccc;
+    border: 2px solid #ff6768;
+    border-left-width: 8px;
   }
 
   .yellow {
-    background-color: #feee7d;
+    background-color: #fff9cc;
+    border: 2px solid #feee7d;
+    border-left-width: 8px;
   }
 
   .btn-block {
