@@ -1,0 +1,214 @@
+.home_page {
+  background-color: #2e2e31;
+  height: 100vh;
+
+  .input_block {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 15vh;
+    width: 100vw;
+
+    .create_btn {
+      margin-right: 36px;
+      font-size: 28px;
+      user-select: none;
+      cursor: pointer;
+      padding: 8px 16px;
+      color: #fffbf1;
+      background-color: #2e2e31;
+      border-radius: 6px;
+    }
+  }
+
+  .title {
+    color: #fffbf1;
+    text-shadow: 0 20px 25px #2e2e31, 0 40px 60px #2e2e31;
+    font-size: 80px;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    user-select: none;
+  }
+
+  .title:before,
+  .title:after {
+    content: "";
+    padding: 0.9em 0.4em;
+    position: absolute;
+    left: 50%;
+    width: 100%;
+    top: 50%;
+    display: block;
+    border: 15px solid red;
+    transform: translateX(-50%) translateY(-50%) rotate(0deg);
+    animation: 10s infinite alternate ease-in-out tipsy;
+  }
+
+  .title:before {
+    border-color: #d9524a #d9524a rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+    z-index: -1;
+  }
+
+  .title:after {
+    border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #d9524a #d9524a;
+    box-shadow: 25px 25px 25px rgba(46, 46, 49, 0.8);
+  }
+
+  @keyframes tipsy {
+    0% {
+      transform: translateX(-50%) translateY(-50%) rotate(0deg);
+    }
+    100% {
+      transform: translateX(-50%) translateY(-50%) rotate(360deg);
+    }
+  }
+}
+
+.button {
+  &.dark {
+    --background: #2f3545;
+    --shadow: 0 2px 8px -1px #{rgba(#151924, 0.32)};
+    --shadow-hover: 0 4px 20px -2px #{rgba(#151924, 0.5)};
+  }
+  &.white {
+    --background: #fff;
+    --text: #275efe;
+    --shadow: 0 2px 8px -1px #{rgba(#121621, 0.04)};
+    --shadow-hover: 0 4px 20px -2px #{rgba(#121621, 0.12)};
+  }
+}
+
+.button {
+  --background: #275efe;
+  --text: #fff;
+  --font-size: 16px;
+  --duration: 0.5s;
+  --move-hover: -4px;
+  --shadow: 0 2px 8px -1px #{rgba(#275efe, 0.32)};
+  --shadow-hover: 0 4px 20px -2px #{rgba(#275efe, 0.5)};
+  padding: 16px 32px;
+  font-weight: 500;
+  line-height: var(--font-size);
+  border-radius: 24px;
+  display: block;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: var(--font-size);
+  letter-spacing: 0.5px;
+  background: var(--background);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  transform: translateY(var(--y));
+  transition: transform var(--duration) ease, box-shadow var(--duration) ease;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  div {
+    display: flex;
+    span {
+      display: block;
+      backface-visibility: hidden;
+      font-style: normal;
+      $i: 1;
+      @while $i < 12 {
+        &:nth-child(#{$i}) {
+          --d: #{$i / 20 + s};
+        }
+        $i: $i + 1;
+      }
+    }
+  }
+  &:hover {
+    --y: var(--move-hover);
+    --shadow: var(--shadow-hover);
+    --move: -4px;
+    --shadow-active: 0 3px 1px rgba(0, 0, 0, 0.2);
+    span {
+      animation: move var(--duration) linear var(--d);
+    }
+  }
+  &.smoke {
+    --move: 12px;
+    --move-y: -8px;
+    --blur: 4px;
+    &:hover {
+      span {
+        --duration: 1s;
+        animation: smoke var(--duration) linear var(--d);
+      }
+    }
+  }
+  &.drive {
+    --move: 16px;
+    --skew: 25deg;
+    --skew-fast: 40deg;
+    --skew-bounce: -12px;
+    &:hover {
+      span {
+        --duration: 1s;
+        transform-origin: 50% 100%;
+        animation: drive var(--duration) linear var(--d);
+      }
+    }
+  }
+}
+
+@keyframes move {
+  40% {
+    transform: translateY(var(--move));
+    text-shadow: var(--shadow-active);
+  }
+}
+
+@keyframes smoke {
+  45%,
+  55% {
+    filter: blur(var(--blur));
+  }
+  50%,
+  50.1% {
+    opacity: 0;
+  }
+  25%,
+  75% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(var(--move)) translateY(var(--move-y));
+  }
+  50.1% {
+    transform: translateX(calc(var(--move) * -1));
+  }
+}
+
+@keyframes drive {
+  40% {
+    opacity: 1;
+  }
+  55% {
+    transform: skewX(var(--skew)) translateX(var(--move));
+  }
+  56% {
+    transform: skewX(var(--skew-fast)) translateX(calc(var(--move) * -1));
+  }
+  55%,
+  56% {
+    opacity: 0;
+  }
+  75% {
+    transform: skewX(var(--skew));
+  }
+  85% {
+    transform: skewX(var(--skew-bounce));
+  }
+}
+
+//<button className="button">Jumping</button>
+//<button className="button smoke dark">Smoke</button>
+//<button className="button drive white">Drive</button>

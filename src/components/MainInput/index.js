@@ -20,7 +20,9 @@ const MainInput = ({ label, btnText, value, maxLength, onChange, onClick }) => {
       <label htmlFor="register">
         <span>{label}</span>
       </label>
-      {value && <button onClick={onClick}>{btnText}</button>}
+      <button className="button smoke dark" onClick={onClick}>
+        {btnText}
+      </button>
     </div>
   );
 };

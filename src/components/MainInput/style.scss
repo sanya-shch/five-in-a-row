@@ -11,17 +11,15 @@
     border: 0;
     padding: 20px 0 0 16px;
     font-size: 0;
-    background: #313131;
+    background-color: #2e2e31;
     transition: background 0.3s ease;
-    color: #e1e0e7;
+    color: #fffbf1;
+    outline: none;
+    box-shadow: 0 2px 8px -1px #{rgba(#151924, 0.32)};
 
     &:focus {
-      background: #414141;
       font-size: 23px;
-
-      &::selection {
-        background: rgba(188, 232, 255, 0.5);
-      }
+      box-shadow: 0 4px 20px -2px #{rgba(#151924, 0.5)};
     }
   }
 
@@ -32,18 +30,16 @@
   }
 
   button {
-    background: #313131;
+    background-color: #2e2e31;
     right: 0;
     border: 0;
     width: 115px;
     border-radius: 6px;
     font-size: 22px;
-    font-family: "Comfortaa", cursive;
     font-weight: 700;
     cursor: pointer;
-    transition: width 0.3s ease, background 0.3s ease, opacity 0.3s ease;
     opacity: 0;
-    color: #e1e0e7;
+    color: #fff;
 
     &.full {
       width: 100%;
@@ -53,12 +49,11 @@
   input:focus + label {
     font-size: 19px;
     transform: translate(16px, 11px);
-    color: rgba(255, 255, 255, 0.7);
   }
 
   label {
     position: absolute;
-    color: #e1e0e7;
+    color: #fffbf1;
     transform: translate(16px, 20px);
     transition: transform 0.3s ease, font-size 0.3s ease, color 0.3s 0.1s ease;
     font-size: 28px;

@@ -92,18 +92,39 @@ const HomePage = observer(({ gameId, setGameId }) => {
     setCode(value.toUpperCase());
   };
 
+  React.useEffect(() => {
+    document
+      .querySelectorAll(".button")
+      .forEach(
+        (button) =>
+          (button.innerHTML =
+            "<div><span>" +
+            button.textContent.trim().split("").join("</span><span>") +
+            "</span></div>")
+      );
+  }, []);
+
   return (
-    <div>
-      FIVE IN A ROW
-      <button onClick={handleClickCreateGame}>Create Game</button>
-      <MainInput
-        label="Enter Game Code"
-        btnText="Join"
-        maxLength={6}
-        value={code}
-        onChange={handleChange}
-        onClick={handleClickJoinToGame}
-      />
+    <div className="home_page">
+      <div className="title">FIVE IN A ROW</div>
+
+      <div className="input_block">
+        <button
+          className="create_btn button smoke dark"
+          onClick={handleClickCreateGame}
+        >
+          Create Game
+        </button>
+
+        <MainInput
+          label="Enter Game Code"
+          btnText="Join"
+          maxLength={6}
+          value={code}
+          onChange={handleChange}
+          onClick={handleClickJoinToGame}
+        />
+      </div>
     </div>
   );
 });
