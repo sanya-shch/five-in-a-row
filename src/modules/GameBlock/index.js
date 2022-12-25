@@ -54,8 +54,15 @@ const GameBlock = observer(({ id }) => {
       gameStore.currentPlayerUid
     );
 
+    const currentPlayerIndex = gameStore.playersList.findIndex(
+      (item) => item.uid === gameStore.currentPlayerUid
+    );
+
     const win = checkWin(
-      gameStore.playersList.map((item) => item.color),
+      [
+        ...gameStore.playersList.slice(currentPlayerIndex),
+        ...gameStore.playersList.slice(0, currentPlayerIndex),
+      ].map((item) => item.color),
       {
         ...gameStore.gameBoard,
         [blockIndex]: newRotatedMatrix.flat(),

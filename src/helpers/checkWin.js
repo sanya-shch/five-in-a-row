@@ -119,8 +119,6 @@ const checkDecreasingDiagonally = (color, matrix, points) => {
 };
 
 export const checkWin = (colors, board, points) => {
-  console.log(colors);
-
   const colorMatrix = getColorMatrix(board, points);
 
   const checkList = [
