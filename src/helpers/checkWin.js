@@ -1,6 +1,6 @@
 import { chunkArray } from "./chunkArray";
 
-const getColorMatrix = (board, points) => {
+const getColorMatrix = (board) => {
   const chunkedBoard = {};
 
   Object.values(board).forEach((block, index) => {
@@ -15,7 +15,7 @@ const getColorMatrix = (board, points) => {
     matrixY++
   ) {
     for (let matrixX = 0; matrixX < 9; matrixX++) {
-      matrix[matrixY].push(points[chunkedBoard[boardIndex][boardY][boardX]]);
+      matrix[matrixY].push(chunkedBoard[boardIndex][boardY][boardX]);
 
       if (boardX === 2) {
         boardX = 0;
@@ -34,53 +34,56 @@ const getColorMatrix = (board, points) => {
   return matrix;
 };
 
-const checkHorizontally = (color, matrix) => {
-  console.log("checkHorizontally", color);
-
-  for (let i = 0, counter = 0; i < 9; i++) {
+const checkHorizontally = (color, matrix, points) => {
+  for (let i = 0, counter = []; i < 9; i++) {
     for (let y = 0; y < 9; y++) {
-      if (matrix[i][y] === color) counter++;
-      else counter = 0;
+      if (points[matrix[i][y]] === color) counter.push(matrix[y][i]);
+      else counter = [];
 
-      if (counter === 5) return color;
+      if (counter.length === 5) return { color, points: counter };
     }
 
-    counter = 0;
+    counter = [];
   }
 
   return false;
 };
 
-const checkVertically = (color, matrix) => {
-  console.log("checkVertically", color);
-
-  for (let i = 0, counter = 0; i < 9; i++) {
+const checkVertically = (color, matrix, points) => {
+  for (let i = 0, counter = []; i < 9; i++) {
     for (let y = 0; y < 9; y++) {
-      if (matrix[y][i] === color) counter++;
-      else counter = 0;
+      if (points[matrix[y][i]] === color) counter.push(matrix[y][i]);
+      else counter = [];
 
-      if (counter === 5) return color;
+      if (counter.length === 5) return { color, points: counter };
     }
 
-    counter = 0;
+    counter = [];
   }
 
   return false;
 };
 
-const checkIncreasingDiagonally = (color, matrix) => {
-  console.log("checkIncreasingDiagonally", color);
-
+const checkIncreasingDiagonally = (color, matrix, points) => {
   for (let i = 4; i < 9; i++) {
     for (let y = 0; y < 5; y++) {
       if (
-        matrix[y][i] === color &&
-        matrix[y + 1][i - 1] === color &&
-        matrix[y + 2][i - 2] === color &&
-        matrix[y + 3][i - 3] === color &&
-        matrix[y + 4][i - 4] === color
+        points[matrix[y][i]] === color &&
+        points[matrix[y + 1][i - 1]] === color &&
+        points[matrix[y + 2][i - 2]] === color &&
+        points[matrix[y + 3][i - 3]] === color &&
+        points[matrix[y + 4][i - 4]] === color
       ) {
-        return color;
+        return {
+          color,
+          points: [
+            matrix[y][i],
+            matrix[y + 1][i - 1],
+            matrix[y + 2][i - 2],
+            matrix[y + 3][i - 3],
+            matrix[y + 4][i - 4],
+          ],
+        };
       }
     }
   }
@@ -88,19 +91,26 @@ const checkIncreasingDiagonally = (color, matrix) => {
   return false;
 };
 
-const checkDecreasingDiagonally = (color, matrix) => {
-  console.log("checkDecreasingDiagonally", color);
-
+const checkDecreasingDiagonally = (color, matrix, points) => {
   for (let i = 0; i < 5; i++) {
     for (let y = 0; y < 5; y++) {
       if (
-        matrix[y][i] === color &&
-        matrix[y + 1][i + 1] === color &&
-        matrix[y + 2][i + 2] === color &&
-        matrix[y + 3][i + 3] === color &&
-        matrix[y + 4][i + 4] === color
+        points[matrix[y][i]] === color &&
+        points[matrix[y + 1][i + 1]] === color &&
+        points[matrix[y + 2][i + 2]] === color &&
+        points[matrix[y + 3][i + 3]] === color &&
+        points[matrix[y + 4][i + 4]] === color
       ) {
-        return color;
+        return {
+          color,
+          points: [
+            matrix[y][i],
+            matrix[y + 1][i + 1],
+            matrix[y + 2][i + 2],
+            matrix[y + 3][i + 3],
+            matrix[y + 4][i + 4],
+          ],
+        };
       }
     }
   }
@@ -109,13 +119,9 @@ const checkDecreasingDiagonally = (color, matrix) => {
 };
 
 export const checkWin = (colors, board, points) => {
-  // console.log(colors, board);
+  console.log(colors);
 
   const colorMatrix = getColorMatrix(board, points);
-  // console.log(colorMatrix);
-
-  // const isHorizontally = checkIncreasingDiagonally("blue", colorMatrix);
-  // console.log(isHorizontally);
 
   const checkList = [
     checkHorizontally,
@@ -126,7 +132,7 @@ export const checkWin = (colors, board, points) => {
 
   for (let color of colors) {
     for (let func of checkList) {
-      const isWin = func(color, colorMatrix);
+      const isWin = func(color, colorMatrix, points);
 
       if (isWin) return isWin;
     }

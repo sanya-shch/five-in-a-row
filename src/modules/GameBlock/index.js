@@ -54,7 +54,7 @@ const GameBlock = observer(({ id }) => {
       gameStore.currentPlayerUid
     );
 
-    const isWin = checkWin(
+    const win = checkWin(
       gameStore.playersList.map((item) => item.color),
       {
         ...gameStore.gameBoard,
@@ -63,13 +63,20 @@ const GameBlock = observer(({ id }) => {
       gameStore.points
     );
 
-    console.log({ isWin });
+    if (win) {
+      const winner = gameStore.playersList.find(
+        (player) => player.color === win.color
+      );
 
-    if (isWin) {
-      await playerWin(id, {
-        ...gameStore.gameBoard,
-        [blockIndex]: newRotatedMatrix.flat(),
-      });
+      await playerWin(
+        id,
+        {
+          ...gameStore.gameBoard,
+          [blockIndex]: newRotatedMatrix.flat(),
+        },
+        winner.uid,
+        win.points
+      );
     } else {
       await rotateBlock(id, nextPlayerUid, {
         ...gameStore.gameBoard,
@@ -93,7 +100,7 @@ const GameBlock = observer(({ id }) => {
                   gameStore.gameStage === "click"
                     ? ""
                     : "without"
-                }`}
+                } ${gameStore.winnerRow.includes(point) ? "win_point" : ""}`}
                 onClick={() => handleClick({ point })}
               />
             ))}

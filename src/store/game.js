@@ -13,6 +13,7 @@ class GameStore {
   gameStage = "click";
 
   gameBoard = {};
+  winnerRow = [];
 
   hostUid = null;
   isHost = false;
