@@ -1,0 +1,2 @@
+(this["webpackJsonpfive-in-a-row"]=this["webpackJsonpfive-in-a-row"]||[]).push([[4],{61:function(i,n,t){},64:function(i,n,t){"use strict";t.r(n);t(3),t(61);var e=t(7);n.default=function(){return Object(e.jsx)("div",{title:"404",children:"404"})}}}]);
+//# sourceMappingURL=4.14981f5f.chunk.js.map
