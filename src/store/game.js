@@ -61,7 +61,7 @@ class GameStore {
     if (!userExists) {
       this.isStartModalOpen = true;
       this.isWaitStart = false;
-    } else if (this.playersList.length >= 4) {
+    } else if (this.playersList.length > 4) {
       // "There are too many players in this game"
       navigate("/");
     } else {

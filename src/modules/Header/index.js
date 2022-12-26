@@ -27,7 +27,7 @@ const Header = observer(() => {
       {gameStore.ongoingGame && (
         <div className="players_list">
           {gameStore.playersList.map((item) => (
-            <Tooltip key={item.color} text={`player_item ${item.username}`}>
+            <Tooltip key={item.color} text={item.username}>
               <div className={`player_item ${item.color}`} />
             </Tooltip>
           ))}
