@@ -2,6 +2,7 @@
   "name": "five-in-a-row",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://sanya-shch.github.io/five-in-a-row/",
   "dependencies": {
     "firebase": "9.15.0",
     "react": "17.0.1",
@@ -14,7 +15,9 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -37,6 +40,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "7.20.5",
     "customize-cra": "1.0.0",
+    "gh-pages": "4.0.0",
     "mobx": "6.7.0",
     "mobx-react-lite": "3.4.0",
     "prettier": "2.7.1",
